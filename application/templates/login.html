@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+{% block body_content %}
+	<font color='blue'><h1>Login Page</h1></font>
+	<div class="form">
+		<form method="POST" action="">
+			{{ form.hidden_tag() }}
+			<div class="form-group">
+				{{ form.email.label }}
+				{{ form.email }}
+				{% if form.email.errors %}
+					<div class="error">
+						{% for error in form.email.errors %}
+							<span>{{ error }}</span>
+						{% endfor %}
+					</div>
+				{% endif %}
+			</div><br>
+			<div class="form-group">
+				{{ form.password.label }}
+				{{ form.password }}
+				{% if form.password.errors %}
+					<div class="error">
+						{% for error in form.password.errors %}
+							<span>{{ error }}</span>
+						{% endfor %}
+					</div>
+				{% endif %}
+			</div><br>
+			<div class="form-group">
+				{{ form.remember.label }}
+				{{ form.remember }}
+			</div><br>
+			<div class="form-group">
+				{{ form.submit }}
+			</div>
+		</form>
+	</div>
+{% endblock body_content %}
