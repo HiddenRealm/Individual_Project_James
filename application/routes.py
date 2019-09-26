@@ -1,16 +1,29 @@
 from flask import render_template, redirect, url_for, request
 from application import app, db, bcrypt
-from application.models import Users
+from application.models import Users, Players
 from application.forms import RegistrationForm, LoginForm, UpdateAccountForm
 from flask_login import login_user, current_user, logout_user, login_required
+
+
+#  <img src="static/'ImageName.Format' alt="Error Text" height=?? width=??>
+
+
+@app.route('/player/<int:player_id>')
+def player(player_id):
+	player_info = Players.query.filter_by(id=player_id).first()
+	return render_template('player.html', title=player_info.first_name, num='1',
+	 name=player_info.first_name + " " +player_info.last_name,
+	 team=player_info.team, worth=player_info.worth, position=player_info.posistion)
 
 @app.route('/')
 @app.route('/home')
 def home():
 	return render_template('home.html', title='Home')
+
 @app.route('/about')
 def about():
 	return render_template('about.html', title='About')
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
 	if current_user.is_authenticated:
@@ -26,10 +39,12 @@ def login():
 			else:
 				return redirect(url_for('home'))
 	return render_template('login.html', title='Login', form=form)
+
 @app.route("/logout")
 def logout():
 	logout_user()
 	return redirect(url_for('login'))
+
 @app.route('/register', methods=['GET', 'POST'])
 def register():
 	form = RegistrationForm()
@@ -46,6 +61,7 @@ def register():
 		db.session.commit()
 		return redirect(url_for('home')) #CHANGE THIS AT SOME POINT
 	return render_template('register.html', title='Register', form=form)
+
 @app.route('/account', methods=['GET', 'POST'])
 @login_required
 def account():

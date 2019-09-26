@@ -17,3 +17,12 @@ class Users(db.Model, UserMixin):
 		return ''.join(['User ID: ',str(self.id), '\r\n',
 		 'Email: ', self.email, '\r\n', 'Name: ',
 		 self.first_name, ' ', self.last_name])
+
+class Players(db.Model):
+	id = db.Column(db.Integer, primary_key=True)
+	first_name = db.Column(db.String(30), nullable=False)
+	last_name = db.Column(db.String(30), nullable=False)
+	team = db.Column(db.String(30), nullable=False)
+	worth = db.Column(db.Integer, nullable=False)
+	posistion = db.Column(db.String(30), nullable=False)
+	picture = db.Column(db.LargeBinary, nullable=True)

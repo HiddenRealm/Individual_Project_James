@@ -4,7 +4,7 @@
 	<title>{{ title }} - Page</title>
 </head>
 <body>
-	<header class ="intro-header" style="background-image: url('static/butterfly.jpg'); height: 500px; background-repeat: no-repeat; background-size: contain;">
+	<header class ="intro-header" style="background-image: url('../static/pitch.jpg'); height: 500px; background-repeat: no-repeat; background-size: contain;">
 	<div class="navbar">
 		{% if current_user.is_authenticated %}
 			<a href="{{ url_for('home') }}">Home</a>
