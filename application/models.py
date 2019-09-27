@@ -26,3 +26,7 @@ class Players(db.Model):
 	worth = db.Column(db.Integer, nullable=False)
 	posistion = db.Column(db.String(30), nullable=False)
 	picture = db.Column(db.LargeBinary, nullable=True)
+
+class Teams(db.Model):
+	id = db.Column(db.Integer, primary_key=True)
+	# user_id = 

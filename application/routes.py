@@ -7,13 +7,16 @@ from flask_login import login_user, current_user, logout_user, login_required
 
 #  <img src="static/'ImageName.Format' alt="Error Text" height=?? width=??>
 
+@app.errorhandler(404)
+def not_found(error):
+	return render_template('error.html', title='No Page')
 
-@app.route('/player/<int:player_id>')
+@app.route('/player/<int(min=1, max=100):player_id>')
 def player(player_id):
 	player_info = Players.query.filter_by(id=player_id).first()
 	return render_template('player.html', title=player_info.first_name, num='1',
-	 name=player_info.first_name + " " +player_info.last_name,
-	 team=player_info.team, worth=player_info.worth, position=player_info.posistion)
+	 name=player_info.first_name + " " +player_info.last_name, team=player_info.team, 
+	 worth=player_info.worth, position=player_info.posistion, lb=player_info.picture)
 
 @app.route('/')
 @app.route('/home')
