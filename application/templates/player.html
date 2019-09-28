@@ -1,0 +1,10 @@
+{% extends "player_layout.html" %}
+{% block body_content %}
+	<font color='red'><h1>{{ name }} Page</h1></font>
+	<div class="form">
+		<p>Player name: {{ name }}</p>
+		<p>Team: {{ team }}</p>
+		<p>Cost: {{ worth }}</p>
+		<p>Position: {{ position }}</p>
+	</div>
+{% endblock body_content %}

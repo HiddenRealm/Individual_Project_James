@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, PasswordField, BooleanField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
-from application.models import Users
+from application.models import Users, Players
 from flask_login import current_user
 
 class RegistrationForm(FlaskForm):
@@ -71,4 +71,4 @@ class UpdateAccountForm(FlaskForm):
 		if email.data != current_user.email:
 			user = Users.query.filter_by(email=email.data).first()
 			if user:
-				raise ValidationError('Email already in use!')
+				raise ValidationError('Email already in use!')	
