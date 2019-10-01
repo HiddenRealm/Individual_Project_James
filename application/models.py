@@ -12,7 +12,7 @@ class Users(db.Model, UserMixin):
 	last_name = db.Column(db.String(30), nullable=False)
 	email = db.Column(db.String(150), nullable=False, unique=True)
 	password = db.Column(db.String(50), nullable=False)
-	team_users = db.relationship('Teams', beckref='customer', lazy=True)
+	team_users = db.relationship('Teams', backref='customer', lazy=True)
 
 	def __repr__(self):
 		return ''.join(['User ID: ',str(self.id), '\r\n',
@@ -27,7 +27,7 @@ class Players(db.Model):
 	worth = db.Column(db.Integer, nullable=False)
 	posistion = db.Column(db.String(30), nullable=False)
 	picture = db.Column(db.LargeBinary, nullable=True)
-	team_players = db.relationship('Teams', beckref='player', lazy=True)
+	team_players = db.relationship('Teams', backref='player', lazy=True)
 
 class Teams(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
