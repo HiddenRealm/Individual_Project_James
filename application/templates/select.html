@@ -2,4 +2,16 @@
 {% block body_content %}
 	<font color='yellow'><h1>{{ title }} Page</h1></font>
 	<p>Welcome to this web app!</p>
+	<div class="form">
+		<form method="POST" action="">
+			{{ form.hidden_tag() }}
+			<div class="form-group">
+				{{ form.one.label }}
+				{{ form.one }}
+			</div><br>
+			<div class="form-group">
+				{{ form.submit }}
+			</div>
+		</form>
+	</div>
 {% endblock body_content %}

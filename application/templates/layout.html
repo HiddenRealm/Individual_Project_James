@@ -9,6 +9,7 @@
 		{% if current_user.is_authenticated %}
 			<a href="{{ url_for('home') }}">Home</a>
 			<a href="{{ url_for('about') }}">About</a>
+			<a href="{{ url_for('select', select=1) }}">Select</a>
 			<a href="{{ url_for('account') }}">Account</a>
 			<a href="{{ url_for('logout') }}">Logout</a>
 		{% else %}
