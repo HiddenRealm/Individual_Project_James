@@ -7,6 +7,10 @@ from flask_login import login_user, current_user, logout_user, login_required
 
 #  <img src="static/'ImageName.Format' alt="Error Text" height=?? width=??>
 
+@app.route('/select')
+def select():
+	return render_template('select.html', title='Select')
+
 @app.errorhandler(404)
 def not_found(error):
 	return render_template('error.html', title='No Page')

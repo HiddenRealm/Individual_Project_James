@@ -1,52 +1,33 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>{{ title }} - Page</title>
-	<style>
-		.backgroundA {
-			background-image: url("data:image/png;base64,{{ lb }}");
-			height: 500px; 
-			background-repeat: 
-			no-repeat; 
-			background-size: contain; 
-		}
-
-		.split {
-			height: 100%;
-			width: 70;
-			position: fixed;
-			z-index: 1;
-			top: 0;
-			overflow-x: hidden;
-			padding-top: 20px;
-		}
-
-		.right {
-			right: 0;
-		}
-		
-		.left {
-			left: 0;
-		}
-	</style>
-</head>
-<body>
-	<div class="navbar">
-		{% if current_user.is_authenticated %}
+	<head>
+		<title>{{ title }} - Page</title>
+		<style>
+			.image {
+				margin-left: 30%;
+				margin-top: -15%;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="navbar">
+			{% if current_user.is_authenticated %}
 			<a href="{{ url_for('home') }}">Home</a>
 			<a href="{{ url_for('about') }}">About</a>
 			<a href="{{ url_for('account') }}">Account</a>
 			<a href="{{ url_for('logout') }}">Logout</a>
-		{% else %}
+			{% else %}
 			<a href="{{ url_for('home') }}">Home</a>
 			<a href="{{ url_for('about') }}">About</a>
 			<a href="{{ url_for('login') }}">Login</a>
 			<a href="{{ url_for('register') }}">Register</a>
-		{% endif %}
-	</div>
-	<div class="left">
-	{% block body_content %}{% endblock %}
-	</div>
-	<div class="right backgroundA">
-</body>
+			{% endif %}
+		</div>
+		<div class="left">
+			{% block body_content %}{% endblock %}
+		</div>
+		<div class="image">
+			<img src="data:image/png;base64,{{ lb }}" alt="Error Text" >
+		</div>
+	</body>
 </html>
