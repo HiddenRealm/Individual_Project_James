@@ -12,6 +12,7 @@ class Users(db.Model, UserMixin):
 	last_name = db.Column(db.String(30), nullable=False)
 	email = db.Column(db.String(150), nullable=False, unique=True)
 	password = db.Column(db.String(50), nullable=False)
+	team_users = db.relationship('Teams', backref='customer', lazy=True)
 
 	def __repr__(self):
 		return ''.join(['User ID: ',str(self.id), '\r\n',
@@ -29,4 +30,19 @@ class Players(db.Model):
 
 class Teams(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
-	# user_id = 
+	user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+	loosehead_prop = db.Column(db.Integer, nullable=False)
+	hooker = db.Column(db.Integer, nullable=False)
+	tighthead_prop = db.Column(db.Integer, nullable=False)
+	left_lock = db.Column(db.Integer, nullable=False)
+	right_lock = db.Column(db.Integer, nullable=False)
+	blindside_flanker = db.Column(db.Integer, nullable=False)
+	openside_flanker = db.Column(db.Integer, nullable=False)
+	number_8 = db.Column(db.Integer, nullable=False)
+	scrum_half = db.Column(db.Integer, nullable=False)
+	fly_half = db.Column(db.Integer, nullable=False)
+	left_wing = db.Column(db.Integer, nullable=False)
+	inside_centre = db.Column(db.Integer, nullable=False)
+	outside_centre = db.Column(db.Integer, nullable=False)
+	right_wing = db.Column(db.Integer, nullable=False)
+	fullback = db.Column(db.Integer, nullable=False)

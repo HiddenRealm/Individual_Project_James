@@ -1,22 +1,11 @@
 from flask import render_template, redirect, url_for, request
 from application import app, db, bcrypt
 from application.models import Users, Players
-from application.forms import RegistrationForm, LoginForm, UpdateAccountForm
+from application.forms import RegistrationForm, LoginForm, UpdateAccountForm, SelectionForm
 from flask_login import login_user, current_user, logout_user, login_required
 
 
 #  <img src="static/'ImageName.Format' alt="Error Text" height=?? width=??>
-
-@app.errorhandler(404)
-def not_found(error):
-	return render_template('error.html', title='No Page')
-
-@app.route('/player/<int(min=1, max=100):player_id>')
-def player(player_id):
-	player_info = Players.query.filter_by(id=player_id).first()
-	return render_template('player.html', title=player_info.first_name, num='1',
-	 name=player_info.first_name + " " +player_info.last_name, team=player_info.team, 
-	 worth=player_info.worth, position=player_info.posistion, lb=player_info.picture)
 
 @app.route('/')
 @app.route('/home')
@@ -62,7 +51,7 @@ def register():
 			password=hashed_pw)
 		db.session.add(user)
 		db.session.commit()
-		return redirect(url_for('home')) #CHANGE THIS AT SOME POINT
+		return redirect(url_for('login'))
 	return render_template('register.html', title='Register', form=form)
 
 @app.route('/account', methods=['GET', 'POST'])
@@ -80,3 +69,21 @@ def account():
 		form.last_name.data = current_user.last_name
 		form.email.data = current_user.email
 	return render_template('account.html', title='Account', form=form)
+
+@app.route('/select/<int(min=1, max=10):select>', methods=['GET', 'POST'])
+def select(select):
+	form = SelectionForm()
+	if form.validate_on_submit():
+		return redirect(url_for('select', select=select+1))
+	return render_template('select.html', title='Select', form=form)
+
+@app.route('/player/<int(min=1, max=100):player_id>')
+def player(player_id):
+	player_info = Players.query.filter_by(id=player_id).first()
+	return render_template('player.html', title=player_info.first_name, num='1',
+	 name=player_info.first_name + " " +player_info.last_name, team=player_info.team, 
+	 worth=player_info.worth, position=player_info.posistion, lb=player_info.picture)
+
+@app.errorhandler(404)
+def not_found(error):
+	return render_template('error.html', title='No Page')
