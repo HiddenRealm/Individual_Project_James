@@ -1,14 +1,85 @@
 {% extends "layout.html" %}
 {% block body_content %}
-	<font color='yellow'><h1>{{ title }} Page</h1></font>
-	<p>Welcome to this web app!</p>
+	<h1>{{ title }} Page</h1>
+	<p>Pick-A-Team!</p>
 	<div class="form">
 		<form method="POST" action="">
-			{{ form.hidden_tag() }}
+			{{ form.hidden_tag() }}	
 			<div class="form-group">
-				{{ form.one.label }}
-				{{ form.one }}
-			</div><br>
+				<a href="{{ url_for('selection', select_id=1) }}">
+				{{ form.positions[0] }}</a>
+				{{ form.Loosehead_Prop }}
+			</div>
+			<div class="form-group">
+				<a href="{{ url_for('home') }}">
+				{{ form.positions[1] }}</a>
+				{{ form.Hooker }}
+			</div>
+			<div class="form-group">
+				<a href="{{ url_for('home') }}">
+				{{ form.positions[2] }}</a>
+				{{ form.Tighthead_Prop }}
+			</div>
+			<div class="form-group">
+				<a href="{{ url_for('home') }}">
+				{{ form.positions[3] }}</a>
+				{{ form.Left_Lock }}
+			</div>
+			<div class="form-group">
+				<a href="{{ url_for('home') }}">
+				{{ form.positions[4] }}</a>
+				{{ form.Right_Lock }}
+			</div>
+			<div class="form-group">
+				<a href="{{ url_for('home') }}">
+				{{ form.positions[5] }}</a>
+				{{ form.Blindside_Flanker }}
+			</div>
+			<div class="form-group">
+				<a href="{{ url_for('home') }}">
+				{{ form.positions[6] }}</a>
+				{{ form.Openside_Flanker }}
+			</div>
+			<div class="form-group">
+				<a href="{{ url_for('home') }}">
+				{{ form.positions[7] }}</a>
+				{{ form.Number }}
+			</div>
+			<div class="form-group">
+				<a href="{{ url_for('home') }}">
+				{{ form.positions[8] }}</a>
+				{{ form.Scrum_Half }}
+			</div>
+			<div class="form-group">
+				<a href="{{ url_for('home') }}">
+				{{ form.positions[9] }}</a>
+				{{ form.Fly_Half }}
+			</div>
+			<div class="form-group">
+				<a href="{{ url_for('home') }}">
+				{{ form.positions[10] }}</a>
+				{{ form.Left_Wing }}
+			</div>
+			<div class="form-group">
+				<a href="{{ url_for('home') }}">
+				{{ form.positions[11] }}</a>
+				{{ form.Inside_Centre }}
+			</div>
+			<div class="form-group">
+				<a href="{{ url_for('home') }}">
+				{{ form.positions[12] }}</a>
+				{{ form.Outside_Centre }}
+			</div>
+			<div class="form-group">
+				<a href="{{ url_for('home') }}">
+				{{ form.positions[13] }}</a>
+				{{ form.Right_Wing }}
+			</div>
+			<div class="form-group">
+				<a href="{{ url_for('home') }}">
+				{{ form.positions[14] }}</a>
+				{{ form.Fullback }}
+			</div>
 			<div class="form-group">
 				{{ form.submit }}
 			</div>

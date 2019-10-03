@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% block body_content %}
+	<h1>{{ title }} Page</h1>
+	<div class="form">
+		<a href="{{ url_for('player', player_id={{ num }} }}"> {{ player1 }}</a> <br>
+		<a href="{{ url_for('player', player_id=(2)) }}"> {{ player2 }}</a>
+		<a href="{{ url_for('player', player_id=(3)) }}"> {{ player3 }}</a>
+		<a href="{{ url_for('player', player_id=(4)) }}"> {{ player4 }}</a>
+		<a href="{{ url_for('player', player_id=(5)) }}"> {{ player5 }}</a>
+		<a href="{{ url_for('player', player_id=(6)) }}"> {{ player6 }}</a>
+		<a href="{{ url_for('player', player_id=(7)) }}"> {{ player7 }}</a>
+		<a href="{{ url_for('player', player_id=(8)) }}"> {{ player8 }}</a>
+		<a href="{{ url_for('player', player_id=(9)) }}"> {{ player9 }}</a>
+		<a href="{{ url_for('player', player_id=(10)) }}"> {{ player10 }}</a>
+	</div>
+	if num = 1
+
+	elif num = 2
+
+	elif num = 3
+{% endblock body_content %}

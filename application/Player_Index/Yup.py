@@ -1,5 +1,4 @@
 import sqlite3
-import base64
 import sys
 
 db = sqlite3.connect('/home/james/Documents/Individual_Project_James/application/site.db')
@@ -8,7 +7,8 @@ cursor = db.cursor()
 def ctb(filename):
     filename = 'Pictures/' + str(filename + 1) + '.jpg'
     with open(filename, 'rb') as p:
-        blobData = base64.b64encode(p.read())
+        blobData = p.read()
+        #blobData = base64.b64encode(p.read())
     return blobData
 
 sql = 'INSERT INTO Players(first_name, last_name, team, worth, posistion, picture) VALUES(?,?,?,?,?,?)'

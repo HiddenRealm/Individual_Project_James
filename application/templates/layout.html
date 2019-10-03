@@ -2,21 +2,32 @@
 <html>
 <head>
 	<title>{{ title }} - Page</title>
+
+	<style>
+			a {
+				color: blue;
+			}
+
+			h1 {
+				color: red;
+			}
+	</style>
 </head>
 <body>
-	<header class ="intro-header" style="background-image: url('static/butterfly.jpg'); height: 500px; background-repeat: no-repeat; background-size: contain;">
-	<div class="navbar">
+	<header class ="intro-header" style="background-color: lightgray; height: 750px; background-repeat: no-repeat; background-size: contain;">
+	<div class="navbar" >
 		{% if current_user.is_authenticated %}
 			<a href="{{ url_for('home') }}">Home</a>
 			<a href="{{ url_for('about') }}">About</a>
-			<a href="{{ url_for('select', select=1) }}">Select</a>
+			<a href="{{ url_for('selection', select_id=1) }}">Select</a>
 			<a href="{{ url_for('account') }}">Account</a>
 			<a href="{{ url_for('logout') }}">Logout</a>
+
 		{% else %}
 			<a href="{{ url_for('home') }}">Home</a>
 			<a href="{{ url_for('about') }}">About</a>
-			<a href="{{ url_for('login') }}">Login</a>
-			<a href="{{ url_for('register') }}">Register</a>
+			<a align=right href="{{ url_for('login') }}">Login</a>
+			<a align=right href="{{ url_for('register') }}">Register</a>
 		{% endif %}
 	</div>
 	{% block body_content %}{% endblock %}
