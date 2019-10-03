@@ -61,6 +61,10 @@ def account():
 	form = UpdateAccountForm()
 	if form.delete.data:
 		temp = Users.query.filter_by(id=current_user.id).first()
+		temp2 = Teams.query.filter_by(user_id=current_user.id).all()
+		if temp2:
+			for i in temp2:
+				db.session.delete(i)
 		db.session.delete(temp)
 		db.session.commit()	
 		return redirect(url_for('register'))
