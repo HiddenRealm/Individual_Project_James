@@ -1,8 +1,8 @@
 from flask import render_template, redirect, url_for, request
 from application import app, db, bcrypt
-from application.models import Users, Players
+from application.models import Users, Players, Teams
 from application.forms import RegistrationForm, LoginForm, UpdateAccountForm, SelectionForm
-from flask_login import LoginManager, login_user, current_user, logout_user, login_required
+from flask_login import login_user, current_user, logout_user, login_required#, LoginManager
 import base64
 
 
@@ -74,9 +74,51 @@ def account():
 @app.route('/select', methods=['GET', 'POST'])
 def select():
 	form = SelectionForm()
+	extra = ''
+	amount = Teams.query.filter_by(user_id=current_user.id).all()
+	if amount:
+		print(amount)
+		amount = len(amount)
+		print(amount)
+	else:
+		amount = 0
+
 	if form.validate_on_submit():
-		return redirect(url_for('home'))
-	return render_template('select.html', title='Select', form=form)
+		num = worth([form.Loosehead_Prop.data, form.Hooker.data,
+					form.Tighthead_Prop.data, form.Left_Lock.data,
+					form.Right_Lock.data, form.Blindside_Flanker.data,
+					form.Openside_Flanker.data, form.Number.data,
+					form.Scrum_Half.data, form.Fly_Half.data,
+					form.Left_Wing.data, form.Inside_Centre.data,
+					form.Outside_Centre.data, form.Right_Wing.data,
+					form.Fullback.data])
+		if amount < 3:
+			if num <= 45000:
+				team = Teams(
+					user_id=current_user.id,
+					loosehead_prop=form.Loosehead_Prop.data,
+					hooker=form.Hooker.data,
+					tighthead_prop=form.Tighthead_Prop.data, 
+					left_lock=form.Left_Lock.data,
+					right_lock=form.Right_Lock.data,
+					blindside_flanker=form.Blindside_Flanker.data,
+					openside_flanker=form.Openside_Flanker.data,
+					number_8=form.Number.data,
+					scrum_half=form.Scrum_Half.data,
+					fly_half=form.Fly_Half.data,
+					left_wing=form.Left_Wing.data,
+					inside_centre=form.Inside_Centre.data,
+					outside_centre=form.Outside_Centre.data,
+					right_wing=form.Right_Wing.data,
+					fullback=form.Fullback.data)
+				db.session.add(team)
+				db.session.commit()
+				return redirect(url_for('home'))
+			else:
+				extra = 'Costs too much: ' + str(num) + ' Should be less than 30,000'
+		else:
+			extra = 'You can only have 3 teams at once, please delete one of you previous teams if you want to add a new one'
+	return render_template('select.html', title='Select', form=form, totWorth=0, more=extra)
 
 @app.route('/player/<int(min=1, max=100):player_id>')
 def player(player_id):
@@ -91,11 +133,22 @@ def selection(select_id):
 	term = Players.query.filter_by(id=(select_id * 10)).first()
 	players = Players.query.filter_by(posistion=term.posistion).all()
 	num = ((select_id - 1) * 10)
-	return render_template('selection.html', title=term.posistion, num=num, player1=players[0].first_name,
-		player2=players[1].first_name, player3=players[2].first_name, player4=players[3].first_name,
-		player5=players[4].first_name, player6=players[5].first_name, player7=players[6].first_name,
-		player8=players[7].first_name, player9=players[8].first_name, player10=players[9].first_name)
+	lists = []
+	for i in range(10):
+		temp = players[i].first_name + ' ' + players[i].last_name + ': ' + players[i].team
+		lists.append(temp)
+
+	return render_template('selection.html', title=term.posistion, num=num, player1=lists[0],
+		player2=lists[1], player3=lists[2], player4=lists[3],
+		player5=lists[4], player6=lists[5], player7=lists[6],
+		player8=lists[7], player9=lists[8], player10=lists[9])
 
 @app.errorhandler(404)
 def not_found(error):
 	return render_template('error.html', title='No Page')
+
+def worth(lists):
+	num=0
+	for x in range(15):
+		num+= Players.query.filter_by(id=lists[x]).first().worth
+	return num

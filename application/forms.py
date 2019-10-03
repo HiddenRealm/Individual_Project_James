@@ -80,7 +80,7 @@ class SelectionForm(FlaskForm):
 
 		for i in range(int(len(names))):
 			name = names[i].first_name + ' ' + names[i].last_name + ': ' + str(names[i].worth)
-			into = [name, name]
+			into = [names[i].id, name]
 			choice.append(into)
 
 		return choice
@@ -93,61 +93,117 @@ class SelectionForm(FlaskForm):
 
 	choice = players('Prop')
 	Loosehead_Prop = SelectField(positions[0], 
-		choices=choice)
+		choices=choice,
+		coerce=int)
 
 	choice = players('Hooker')
 	Hooker = SelectField(positions[1], 
-	 	choices=choice)
+	 	choices=choice,
+		coerce=int)
 
 	choice = players('Prop')
 	Tighthead_Prop = SelectField(positions[2], 
-	 	choices=choice)
+	 	choices=choice,
+		coerce=int)
 
 	choice = players('Locks')
 	Left_Lock = SelectField(positions[3], 
-		choices=choice)
+		choices=choice,
+		coerce=int)
 	
 	choice = players('Locks')
 	Right_Lock = SelectField(positions[4], 
-		choices=choice)
+		choices=choice,
+		coerce=int)
 	
 	choice = players('Flanker')
 	Blindside_Flanker = SelectField(positions[5], 
-		choices=choice)
+		choices=choice,
+		coerce=int)
 	
 	choice = players('Flanker')
 	Openside_Flanker = SelectField(positions[6], 
-		choices=choice)
+		choices=choice,
+		coerce=int)
 	
 	choice = players('Number 8')
 	Number = SelectField(positions[7], 
-		choices=choice)
+		choices=choice,
+		coerce=int)
 	
 	choice = players('Scrumhalf')
 	Scrum_Half = SelectField(positions[8], 
-		choices=choice)
+		choices=choice,
+		coerce=int)
 	
 	choice = players('Flyhalf')
 	Fly_Half = SelectField(positions[9], 
-		choices=choice)
+		choices=choice,
+		coerce=int)
 	
 	choice = players('Wings')
 	Left_Wing = SelectField(positions[10], 
-		choices=choice)
+		choices=choice,
+		coerce=int)
 	
 	choice = players('Centre')
 	Inside_Centre = SelectField(positions[11], 
-		choices=choice)
+		choices=choice,
+		coerce=int)
 	
 	choice = players('Centre')
 	Outside_Centre = SelectField(positions[12], 
-		choices=choice)
+		choices=choice,
+		coerce=int)
 	
 	choice = players('Wings')
 	Right_Wing = SelectField(positions[13], 
-		choices=choice)
+		choices=choice,
+		coerce=int)
 	
 	choice = players('Fullback')
 	Fullback = SelectField(positions[14], 
-		choices=choice)
+		choices=choice,
+		coerce=int)
+
 	submit = SubmitField('Save!')
+
+	def validate_Loosehead_Prop(self, Loosehead_Prop):
+		if self.Tighthead_Prop.data == Loosehead_Prop.data:
+			raise ValidationError("Can't have two of the same Props")
+
+	def validate_Tighthead_Prop(self, Tighthead_Prop):
+		if Tighthead_Prop.data == self.Loosehead_Prop.data:
+			raise ValidationError("Can't have two of the same Props")
+
+	def validate_Left_Lock(self, Left_Lock):
+		if self.Right_Lock.data == Left_Lock.data:
+			raise ValidationError("Can't have two of the same Locks")
+
+	def validate_Right_Lock(self, Right_Lock):
+		if Right_Lock.data == self.Left_Lock.data:
+			raise ValidationError("Can't have two of the same Locks")
+
+	def validate_Blindside_Flanker(self, Blindside_Flanker):
+		if self.Openside_Flanker.data == Blindside_Flanker.data:
+			raise ValidationError("Can't have two of the same Flankers")
+
+	def validate_Openside_Flanker(self, Openside_Flanker):
+		if Openside_Flanker.data == self.Blindside_Flanker.data:
+			raise ValidationError("Can't have two of the same Flankers")
+
+	def validate_Left_Wing(self, Left_Wing):
+		if self.Right_Wing.data == Left_Wing.data:
+			raise ValidationError("Can't have two of the same Wings")
+
+	def validate_Right_Wing(self, Right_Wing):
+		if Right_Wing.data == self.Left_Wing.data:
+			raise ValidationError("Can't have two of the same Wings")
+
+	def validate_Inside_Centre(self, Inside_Centre):
+		if self.Outside_Centre.data == Inside_Centre.data:
+			raise ValidationError("Can't have two of the same Centre's")
+
+	def validate_Outside_Centre(self, Outside_Centre):
+		if Outside_Centre.data == self.Inside_Centre.data:
+			raise ValidationError("Can't have two of the same Centre's")

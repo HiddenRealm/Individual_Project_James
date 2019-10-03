@@ -2,20 +2,18 @@
 {% block body_content %}
 	<h1>{{ title }} Page</h1>
 	<div class="form">
-		<a href="{{ url_for('player', player_id={{ num }} }}"> {{ player1 }}</a> <br>
-		<a href="{{ url_for('player', player_id=(2)) }}"> {{ player2 }}</a>
-		<a href="{{ url_for('player', player_id=(3)) }}"> {{ player3 }}</a>
-		<a href="{{ url_for('player', player_id=(4)) }}"> {{ player4 }}</a>
-		<a href="{{ url_for('player', player_id=(5)) }}"> {{ player5 }}</a>
-		<a href="{{ url_for('player', player_id=(6)) }}"> {{ player6 }}</a>
-		<a href="{{ url_for('player', player_id=(7)) }}"> {{ player7 }}</a>
-		<a href="{{ url_for('player', player_id=(8)) }}"> {{ player8 }}</a>
-		<a href="{{ url_for('player', player_id=(9)) }}"> {{ player9 }}</a>
-		<a href="{{ url_for('player', player_id=(10)) }}"> {{ player10 }}</a>
-	</div>
-	if num = 1
-
-	elif num = 2
-
-	elif num = 3
+		<a href="{{ url_for('player', player_id=(num + 1)) }}"> {{ player1 }}</a> <br>
+		<a href="{{ url_for('player', player_id=(num + 2)) }}"> {{ player2 }}</a> <br>
+		<a href="{{ url_for('player', player_id=(num + 3)) }}"> {{ player3 }}</a> <br>
+		<a href="{{ url_for('player', player_id=(num + 4)) }}"> {{ player4 }}</a> <br>
+		<a href="{{ url_for('player', player_id=(num + 5)) }}"> {{ player5 }}</a> <br>
+		<a href="{{ url_for('player', player_id=(num + 6)) }}"> {{ player6 }}</a> <br>
+		<a href="{{ url_for('player', player_id=(num + 7)) }}"> {{ player7 }}</a> <br>
+		<a href="{{ url_for('player', player_id=(num + 8)) }}"> {{ player8 }}</a> <br>
+		<a href="{{ url_for('player', player_id=(num + 9)) }}"> {{ player9 }}</a> <br>
+		<a href="{{ url_for('player', player_id=(num + 10)) }}"> {{ player10 }}</a>
+	</div><br>
+	<form>
+  		<input type="button" value="Go back!" onclick="history.back()">
+	</form>
 {% endblock body_content %}
