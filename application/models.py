@@ -46,3 +46,4 @@ class Teams(db.Model):
 	outside_centre = db.Column(db.Integer, nullable=False)
 	right_wing = db.Column(db.Integer, nullable=False)
 	fullback = db.Column(db.Integer, nullable=False)
+	team_name = db.Column(db.String(30), nullable=False)

@@ -1,8 +1,8 @@
 from flask import render_template, redirect, url_for, request
 from application import app, db, bcrypt
 from application.models import Users, Players, Teams
-from application.forms import RegistrationForm, LoginForm, UpdateAccountForm, SelectionForm
-from flask_login import login_user, current_user, logout_user, login_required#, LoginManager
+from application.forms import RegistrationForm, LoginForm, UpdateAccountForm, SelectionForm, DeletionForm
+from flask_login import login_user, current_user, logout_user, login_required, LoginManager
 import base64
 
 
@@ -59,6 +59,11 @@ def register():
 @login_required
 def account():
 	form = UpdateAccountForm()
+	if form.delete.data:
+		temp = Users.query.filter_by(id=current_user.id).first()
+		db.session.delete(temp)
+		db.session.commit()	
+		return redirect(url_for('register'))
 	if form.validate_on_submit():
 		current_user.first_name = form.first_name.data
 		current_user.last_name = form.last_name.data
@@ -77,9 +82,7 @@ def select():
 	extra = ''
 	amount = Teams.query.filter_by(user_id=current_user.id).all()
 	if amount:
-		print(amount)
 		amount = len(amount)
-		print(amount)
 	else:
 		amount = 0
 
@@ -93,9 +96,10 @@ def select():
 					form.Outside_Centre.data, form.Right_Wing.data,
 					form.Fullback.data])
 		if amount < 3:
-			if num <= 45000:
+			if num <= 32500:
 				team = Teams(
 					user_id=current_user.id,
+					team_name=form.Team_Name.data,
 					loosehead_prop=form.Loosehead_Prop.data,
 					hooker=form.Hooker.data,
 					tighthead_prop=form.Tighthead_Prop.data, 
@@ -115,10 +119,10 @@ def select():
 				db.session.commit()
 				return redirect(url_for('home'))
 			else:
-				extra = 'Costs too much: ' + str(num) + ' Should be less than 30,000'
+				extra = 'Costs too much: ' + str(num) + ' Should be less than 32,500'
 		else:
 			extra = 'You can only have 3 teams at once, please delete one of you previous teams if you want to add a new one'
-	return render_template('select.html', title='Select', form=form, totWorth=0, more=extra)
+	return render_template('select.html', title='Select', form=form, more=extra)
 
 @app.route('/player/<int(min=1, max=100):player_id>')
 def player(player_id):
@@ -142,6 +146,96 @@ def selection(select_id):
 		player2=lists[1], player3=lists[2], player4=lists[3],
 		player5=lists[4], player6=lists[5], player7=lists[6],
 		player8=lists[7], player9=lists[8], player10=lists[9])
+
+@app.route('/teamsettings', methods=['GET', 'POST'])
+def teamsettings():
+	term = Teams.query.filter_by(user_id=current_user.id).all()
+	try:
+		name1 = term[0].team_name
+	except:
+		name1 = 'Empty'
+	try:
+		name2 = term[1].team_name
+	except:
+		name2 = 'Empty'
+	try:
+		name3 = term[2].team_name
+	except:
+		name3 = 'Empty'
+
+	form = DeletionForm()
+	if form.deleteOne.data:
+		db.session.delete(term[0])
+		db.session.commit()	
+		return redirect(url_for('teamsettings'))
+	elif form.deleteTwo.data:
+		db.session.delete(term[1])
+		db.session.commit()	
+		return redirect(url_for('teamsettings'))
+	elif form.deleteThree.data:
+		db.session.delete(term[2])
+		db.session.commit()	
+		return redirect(url_for('teamsettings'))
+
+	return render_template('teamsettings.html', title='Team Settings', team1=name1,
+		team2=name2, team3=name3, form=form)
+
+@app.route('/teamsettings/<int(min=1, max=3):teamsettings_id>', methods=['GET','POST'])
+def teamsettings_id(teamsettings_id):
+	term = Teams.query.filter_by(user_id=current_user.id).all()
+	form = SelectionForm()
+	current_team = term[teamsettings_id-1]
+	if form.validate_on_submit():
+		num = worth([form.Loosehead_Prop.data, form.Hooker.data,
+					form.Tighthead_Prop.data, form.Left_Lock.data,
+					form.Right_Lock.data, form.Blindside_Flanker.data,
+					form.Openside_Flanker.data, form.Number.data,
+					form.Scrum_Half.data, form.Fly_Half.data,
+					form.Left_Wing.data, form.Inside_Centre.data,
+					form.Outside_Centre.data, form.Right_Wing.data,
+					form.Fullback.data])
+		if num <= 32500:
+			current_team.team_name=form.Team_Name.data
+			current_team.loosehead_prop=form.Loosehead_Prop.data
+			current_team.hooker=form.Hooker.data
+			current_team.tighthead_prop=form.Tighthead_Prop.data
+			current_team.left_lock=form.Left_Lock.data
+			current_team.right_lock=form.Right_Lock.data
+			current_team.blindside_flanker=form.Blindside_Flanker.data
+			current_team.openside_flanker=form.Openside_Flanker.data
+			current_team.number_8=form.Number.data
+			current_team.scrum_half=form.Scrum_Half.data
+			current_team.fly_half=form.Fly_Half.data
+			current_team.left_wing=form.Left_Wing.data
+			current_team.inside_centre=form.Inside_Centre.data
+			current_team.outside_centre=form.Outside_Centre.data
+			current_team.right_wing=form.Right_Wing.data
+			current_team.fullback=form.Fullback.data
+			db.session.commit()
+			return redirect(url_for('home'))
+		else:
+			extra = 'Costs too much: ' + str(num) + ' Should be less than 32,500'
+		return redirect(url_for('teamsettings_id', teamsettings_id=teamsettings_id))
+	elif request.method == 'GET':
+		form.Team_Name.data = current_team.team_name
+		form.Loosehead_Prop.data = current_team.loosehead_prop
+		form.Hooker.data = current_team.hooker
+		form.Tighthead_Prop.data = current_team.tighthead_prop
+		form.Left_Lock.data = current_team.left_lock
+		form.Right_Lock.data = current_team.right_lock
+		form.Blindside_Flanker.data = current_team.blindside_flanker
+		form.Openside_Flanker.data = current_team.openside_flanker
+		form.Number.data = current_team.number_8
+		form.Scrum_Half.data = current_team.scrum_half
+		form.Fly_Half.data = current_team.fly_half
+		form.Left_Wing.data = current_team.left_wing
+		form.Inside_Centre.data = current_team.inside_centre
+		form.Outside_Centre.data = current_team.outside_centre
+		form.Right_Wing.data = current_team.right_wing
+		form.Fullback.data = current_team.fullback
+
+	return render_template('teamsettings_id.html', title='Update Team Settings', 
+		name=term[teamsettings_id-1].team_name, form=form)
 
 @app.errorhandler(404)
 def not_found(error):

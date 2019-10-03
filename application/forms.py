@@ -66,12 +66,18 @@ class UpdateAccountForm(FlaskForm):
 			Email()
 		])
 	submit = SubmitField('Update')
+	delete = SubmitField('Delete')
 
 	def validate_email(self, email):
 		if email.data != current_user.email:
 			user = Users.query.filter_by(email=email.data).first()
 			if user:
-				raise ValidationError('Email already in use!')	
+				raise ValidationError('Email already in use!')
+
+class DeletionForm(FlaskForm):
+	deleteOne = SubmitField('Delete')
+	deleteTwo = SubmitField('Delete')
+	deleteThree = SubmitField('Delete')
 
 class SelectionForm(FlaskForm):
 	def players(name):
@@ -165,6 +171,12 @@ class SelectionForm(FlaskForm):
 	Fullback = SelectField(positions[14], 
 		choices=choice,
 		coerce=int)
+
+	Team_Name = StringField('Team Name: ',
+		validators=[
+			DataRequired(),
+			Length(min=2, max=30)
+			])
 
 	submit = SubmitField('Save!')
 
