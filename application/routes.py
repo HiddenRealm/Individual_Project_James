@@ -117,7 +117,7 @@ def select():
 					fullback=form.Fullback.data)
 				db.session.add(team)
 				db.session.commit()
-				return redirect(url_for('home'))
+				return redirect(url_for('teamsettings'))
 			else:
 				extra = 'Costs too much: ' + str(num) + ' Should be less than 32,500'
 		else:
