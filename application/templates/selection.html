@@ -1,9 +1,8 @@
 {% extends "layout.html" %}
 {% block body_content %}
-	<font color='red'><h1>{{ title }} Page</h1></font>
+	<h1>{{ title }} Page</h1>
 	<div class="form">
-		{% for i in xrange({{ num }}, {{ num }}+10) %}
-		<a href="{{ url_for('player', player_id={{ i }} }}"> {{ player1 }}</a> <br>
+		<a href="{{ url_for('player', player_id={{ num }} }}"> {{ player1 }}</a> <br>
 		<a href="{{ url_for('player', player_id=(2)) }}"> {{ player2 }}</a>
 		<a href="{{ url_for('player', player_id=(3)) }}"> {{ player3 }}</a>
 		<a href="{{ url_for('player', player_id=(4)) }}"> {{ player4 }}</a>
@@ -13,7 +12,6 @@
 		<a href="{{ url_for('player', player_id=(8)) }}"> {{ player8 }}</a>
 		<a href="{{ url_for('player', player_id=(9)) }}"> {{ player9 }}</a>
 		<a href="{{ url_for('player', player_id=(10)) }}"> {{ player10 }}</a>
-		{% endfor %}
 	</div>
 	if num = 1
 

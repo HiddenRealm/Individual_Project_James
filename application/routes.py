@@ -2,7 +2,8 @@ from flask import render_template, redirect, url_for, request
 from application import app, db, bcrypt
 from application.models import Users, Players
 from application.forms import RegistrationForm, LoginForm, UpdateAccountForm, SelectionForm
-from flask_login import login_user, current_user, logout_user, login_required
+from flask_login import LoginManager, login_user, current_user, logout_user, login_required
+import base64
 
 
 #  <img src="static/'ImageName.Format' alt="Error Text" height=?? width=??>
@@ -80,9 +81,10 @@ def select():
 @app.route('/player/<int(min=1, max=100):player_id>')
 def player(player_id):
 	player_info = Players.query.filter_by(id=player_id).first()
+	pic = base64.b64encode(player_info.picture)
 	return render_template('player.html', title=player_info.first_name, num='1',
 	 name=player_info.first_name + " " +player_info.last_name, team=player_info.team, 
-	 worth=player_info.worth, position=player_info.posistion, lb=player_info.picture)
+	 worth=player_info.worth, position=player_info.posistion, lb=pic)
 
 @app.route('/select/<int(min=1, max=10):select_id>', methods=['GET', 'POST'])
 def selection(select_id):
