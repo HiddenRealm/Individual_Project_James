@@ -1,20 +1,11 @@
 {% extends "layout.html" %}
 {% block body_content %}
 <html>
-	<head>
-		<style>
-			.image {
-				margin-left: 30%;
-				margin-top: -15%;
-			}
-		</style>
-	</head>
-		<div class="left">
-			{% block player_body_content %}{% endblock %}
-		</div>
-		<div class="image">
-			<img src="data:image/png;base64,{{ lb }}" alt="Error Text" >
-		</div>
-	</body>
+	<div class="left">
+		{% block player_body_content %}{% endblock %}
+	</div>
+	<div class="image">
+		<img src="data:image/png;base64,{{ lb }}" alt="Error Text" >
+	</div>
 </html>
 {% endblock body_content %}

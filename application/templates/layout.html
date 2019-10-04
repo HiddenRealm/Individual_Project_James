@@ -9,26 +9,49 @@
 			}
 
 			h1 {
+				color: green;
+			}
+
+			span {
 				color: red;
+			}
+
+			.right {
+				float: right;
+			}
+
+			.padding {
+				padding-right: 5px;
+			}
+
+			.intro-header {
+				background-color: lightgray; 
+				height: 750px; 
+				background-repeat: no-repeat; 
+				background-size: contain;
+			}
+
+			.image {
+				margin-left: 30%;
+				margin-top: -15%;
 			}
 	</style>
 </head>
 <body>
-	<header class ="intro-header" style="background-color: lightgray; height: 750px; background-repeat: no-repeat; background-size: contain;">
+	<header class ="intro-header">
 	<div class="navbar" >
 		{% if current_user.is_authenticated %}
 			<a href="{{ url_for('home') }}">Home</a>
 			<a href="{{ url_for('about') }}">About</a>
 			<a href="{{ url_for('select') }}">Select</a>
 			<a href="{{ url_for('teamsettings') }}">Teams</a>
-			<a href="{{ url_for('account') }}">Account</a>
-			<a href="{{ url_for('logout') }}">Logout</a>
-
+			<a class="right" href="{{ url_for('logout') }}">Logout</a>
+			<a class="right padding" href="{{ url_for('account') }}">Account</a>
 		{% else %}
 			<a href="{{ url_for('home') }}">Home</a>
 			<a href="{{ url_for('about') }}">About</a>
-			<a href="{{ url_for('login') }}">Login</a>
-			<a href="{{ url_for('register') }}">Register</a>
+			<a class="right" href="{{ url_for('register') }}">Register</a>
+			<a class="right padding" href="{{ url_for('login') }}">Login</a>
 		{% endif %}
 	</div>
 	{% block body_content %}{% endblock %}
