@@ -5,9 +5,6 @@ from application.forms import RegistrationForm, LoginForm, UpdateAccountForm, Se
 from flask_login import login_user, current_user, logout_user, login_required, LoginManager
 import base64
 
-
-#  <img src="static/'ImageName.Format' alt="Error Text" height=?? width=??>
-
 @app.route('/')
 @app.route('/home')
 def home():
