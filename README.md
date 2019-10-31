@@ -4,7 +4,7 @@ QAC Individual Project
 Containerise my project with Docker:   
 
     Download docker:
-      run downlaod_docker.sh
+      run download_docker.sh
     Restart your terminal
     Run the project in docker:
       run docker_build.sh
@@ -17,7 +17,7 @@ Containerise my project with Jenkins & Docker:
       jenkins ALL:ALL NOPASSWD:ALL
       into "sudo visudo"
     Download docker:
-      run downlaod_docker.sh
+      run download_docker.sh
     Restart your terminal
 
     Log into your jenkins:
