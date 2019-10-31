@@ -2,7 +2,7 @@
 QAC Individual Project
 
 Containerise my project with Docker:   
-    
+
     Download docker:
       run downlaod_docker.sh
     Restart your terminal
