@@ -38,6 +38,8 @@ Containerise my project with Jenkins & Docker:
 
 Run a GCP VM Instance to compile & run my Indiv Project:
     
+    If you want to clear the temp VM & firewall:
+        run docker_remove_GCP.sh
     Install GCP to Debian/Ubuntu:
       run install_GCP.sh
     Run the project in a gcp instance w/ docker:
