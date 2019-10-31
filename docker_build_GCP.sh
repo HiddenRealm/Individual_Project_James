@@ -1,4 +1,5 @@
  gcloud compute instances create temp --image-family ubuntu-1604-lts --image-project ubuntu-os-cloud --tags http-server,https-server
+ gcloud compute firewall-rules create rugby-site --allow tcp:5000 --description "Allow the site to be reached"
  
  gcloud compute ssh -q temp << EOF
     sudo apt update
