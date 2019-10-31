@@ -1,4 +1,5 @@
- gcloud compute ssh -q test << EOF
+ gcloud compute instances create temp --image-family ubuntu-1604-lts --image-project ubuntu-os-cloud
+ gcloud compute ssh -q temp << EOF
     sudo apt update
     sudo apt-get install -y docker
     sudo apt-get install -y docker.io
