@@ -23,7 +23,8 @@ QAC Individual Project
         
 # Run my project as a SystemD:
 
-    pass
+    run systemd_build.sh
+    Navigate to localhost:5000 to see if the site is up
 
 # Containerise my project with Docker:   
 
