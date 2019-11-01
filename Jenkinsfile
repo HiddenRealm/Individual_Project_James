@@ -18,7 +18,7 @@ pipeline{
 		}
 		stage('---Build_Container---'){
 			steps{
-				sh "sudo docker run -d --name rugby -p 5000:5000 fantasy-rugby:latest"
+				sh "sudo docker run -d -p 5000:5000 --name rugby fantasy-rugby:latest"
 			}
 		}
 		stage('---Script_Check---'){
