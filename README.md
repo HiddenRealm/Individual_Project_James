@@ -1,7 +1,7 @@
 # Individual_Project_James
 QAC Individual Project
 
-Intro:
+# Intro:
 
     By week 8 of training we had to design, develop and present an individual project, this is mine. 
     The application had to have C.R.U.D functionality. I made a fantasy football knock-off with rugby players. 
@@ -10,22 +10,22 @@ Intro:
     I wrote the back end of the application with a mixture of Python3 & Flask, 
     the front end was written in Jinja2, HTML & CSS and the database was an SQLite database.
 
-Pre Requisites:
+# Pre Requisites:
     
     Clone this repo down
     Check Python3 is installed
     CD into Individual_Project_James
 
-Running the project:
+# Running the project:
     
     run build.sh
     Navigate to localhost:5000 to see if the site is up
         
-Run my project as a SystemD:
+# Run my project as a SystemD:
 
     pass
 
-Containerise my project with Docker:   
+# Containerise my project with Docker:   
 
     Install docker:
       run install_docker.sh
@@ -36,7 +36,7 @@ Containerise my project with Docker:
     Run "docker ps" to check rugby is up & running
     Navigate to localhost:5000 to see if the site is up
 
-Containerise my project with Jenkins & Docker:
+# Containerise my project with Jenkins & Docker:
 
     Enter into file:
       jenkins ALL:ALL NOPASSWD:ALL
@@ -61,7 +61,7 @@ Containerise my project with Jenkins & Docker:
               sudo docker run -d -p 5000:5000 --name rugby fantasy-rugby
               sudo docker system prune -af
 
-Run a GCP VM Instance to compile & run my Indiv Project:
+# Run a GCP VM Instance to compile & run my Indiv Project:
 
     Install GCP to Debian/Ubuntu:
       run install_GCP.sh
