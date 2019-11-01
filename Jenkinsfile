@@ -1,8 +1,8 @@
 pipeline{
-    agent any
+	agent any
     stages{
 		stage('---Build_Image---'){
-            steps{
+			steps{
                 sh "sudo docker build -t fantasy-rugby:latest ."
             }
         }
