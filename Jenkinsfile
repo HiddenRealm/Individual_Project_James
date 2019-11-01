@@ -34,7 +34,7 @@ pipeline{
 					then
 					break
 					fi
-					((count++))
+					((count+=1))
 					done
 					'''
 			}
