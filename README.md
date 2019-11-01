@@ -5,10 +5,10 @@ Intro:
 By week 8 of training we had to design, develop and present an individual project, this is mine. The application had to have C.R.U.D functionality. I made a fantasy football knock-off with rugby players. When I was designing my app, I used a Trello board to help break up my tasks and manage my planned sprints, I built the application in a VirtualBox machine with an Ubuntu 16.04 image. I wrote the back end of the application with a mixture of Python3 & Flask, the front end was written in Jinja2, HTML & CSS and the database was an SQLite database.
     
     Running the project:
-        ```
-        run build.sh
-        Navigate to localhost:5000 to see if the site is up
-        ```
+            ```
+            run build.sh
+            Navigate to localhost:5000 to see if the site is up
+            ```
         
     Run my project as a SystemD:
         ```
