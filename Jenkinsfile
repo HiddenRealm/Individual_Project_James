@@ -18,7 +18,7 @@ pipeline{
 		}
 		stage('---Build_Container---'){
 			steps{
-				sh "sudo docker run -d --name rugby -p 8888:8888 fantasy-rugby"
+				sh "sudo docker run -d --name rugby -p 5000:5000 fantasy-rugby"
 			}
 		}
 	}
