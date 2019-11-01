@@ -1,4 +1,10 @@
-sudo useradd -m -s /bin/bash pythonadm
+sudo apt-get update
+sudo apt install -y python3-pip
+sudo apt install -y virtualenv
+
+if [ ! "$(cat /etc/passwd | grep pythonadm)" ];
+    then sudo useradd -m -s /bin/bash pythonadm
+fi
 
 sudo cp flask-app.service /etc/systemd/system/
 sudo systemctl daemon-reload
@@ -18,3 +24,4 @@ pip3 install -r requirements.txt
 EOF
 
 sudo systemctl start flask-app
+
