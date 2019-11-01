@@ -25,17 +25,9 @@ pipeline{
 			steps{
 				sh label: 'Test', script:
 					'''
-					valid=true
-					count=1
-					while [ $valid ]
-					do
-					echo $count
-					if [ $count -eq 5 ];
-					then
-					break
-					fi
-					((count+=1))
-					done
+					echo "Hi"
+					echo "2"
+					echo "6"
 					'''
 			}
 		}
