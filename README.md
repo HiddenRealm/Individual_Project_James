@@ -9,7 +9,13 @@ Intro:
     I built the application in a VirtualBox machine with an Ubuntu 16.04 image. 
     I wrote the back end of the application with a mixture of Python3 & Flask, 
     the front end was written in Jinja2, HTML & CSS and the database was an SQLite database.
+
+Pre Requisites:
     
+    Clone this repo down
+    Check Python3 is installed
+    CD into Individual_Project_James
+
 Running the project:
     
     run build.sh
