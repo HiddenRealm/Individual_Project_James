@@ -1,0 +1,22 @@
+
+version: '3.7'
+services:
+  app:
+    image: app
+    build: .
+    ports: 
+      - target: 5000
+        published: 80
+    depends_on:
+      - mysql
+    volumes:
+    - type: volume
+      source: sitedb
+      target: /application/site.db
+  mysql:
+    build: ./Database
+    environment:
+      - MYSQL_DATABASE=site
+      - MYSQL_ROOT_PASSWORD=password
+volumes:
+	sitedb:
