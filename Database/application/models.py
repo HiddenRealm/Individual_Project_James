@@ -19,6 +19,15 @@ class Users(db.Model, UserMixin):
 		 'Email: ', self.email, '\r\n', 'Name: ',
 		 self.first_name, ' ', self.last_name])
 
+class Players(db.Model):
+	id = db.Column(db.Integer, primary_key=True)
+	first_name = db.Column(db.String(30), nullable=False)
+	last_name = db.Column(db.String(30), nullable=False)
+	team = db.Column(db.String(30), nullable=False)
+	worth = db.Column(db.Integer, nullable=False)
+	posistion = db.Column(db.String(30), nullable=False)
+	picture = db.Column(db.LargeBinary, nullable=True)
+
 class Teams(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
 	user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
@@ -38,12 +47,3 @@ class Teams(db.Model):
 	right_wing = db.Column(db.Integer, nullable=False)
 	fullback = db.Column(db.Integer, nullable=False)
 	team_name = db.Column(db.String(30), nullable=False)
-
-class Players(db.Model):
-	id = db.Column(db.Integer, primary_key=True)
-	first_name = db.Column(db.String(30), nullable=False)
-	last_name = db.Column(db.String(30), nullable=False)
-	team = db.Column(db.String(30), nullable=False)
-	worth = db.Column(db.Integer, nullable=False)
-	posistion = db.Column(db.String(30), nullable=False)
-	picture = db.Column(db.LargeBinary, nullable=True)

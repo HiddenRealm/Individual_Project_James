@@ -1,0 +1,15 @@
+
+version: '3.7'
+services:
+  app:
+    image: app
+    build: .
+    ports: 
+      - target: 5000
+        published: 80
+    depends_on:
+      - mysql
+  mysql:
+    build: ./Database
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
